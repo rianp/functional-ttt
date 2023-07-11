@@ -1,23 +1,21 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { printGreeting, printInstructions } from "./components/Console";
+import { formatBoard } from "./utils/Formatter";
+import { generateBoard } from "./components/Board";
 
 function App() {
+  const greeting = printGreeting();
+  const instructions = printInstructions();
+  let boardSize = 9;
+  const board = formatBoard(generateBoard(boardSize), boardSize);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <pre>{greeting}</pre>
       </header>
+      <pre>{instructions}</pre>
+      <body className="App-body">{board}</body>
     </div>
   );
 }
