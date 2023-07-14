@@ -1,9 +1,10 @@
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-import { render, screen } from '@testing-library/react';
-import App from './App';
-
-test('renders learn react link', () => {
+test("displays the Tic-Tac-Toe header", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  // Check if the Tic-Tac-Toe header is rendered
+  const headerElement = screen.getByText(/Tic-Tac-Toe/i);
+  expect(headerElement).toBeInTheDocument();
 });

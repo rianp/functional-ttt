@@ -28,11 +28,19 @@
 
 .App-body {
   max-width: 70vh;
-  margin: 0 auto;
+  margin: 20px auto;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.button {
+  background-color: pink;
+  border: 1px solid darkred;
+  padding: 10;
 }
 
 @keyframes App-logo-spin {
