@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-export default function Toggle({ children }) {
+export default function InstructionsButton({ children }) {
   const [showContent, setShowContent] = useState(false);
 
   const toggleContent = () => {
@@ -18,6 +18,6 @@ export default function Toggle({ children }) {
   );
 }
 
-Toggle.propTypes = {
+InstructionsButton.propTypes = {
   children: PropTypes.node.isRequired,
 };

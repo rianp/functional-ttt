@@ -1,6 +1,7 @@
 import Row from "./Row";
 import "./Board.css";
 import PropTypes from "prop-types";
+const { arrayOf, number } = PropTypes;
 
 function Board({ data }) {
   return (
@@ -13,7 +14,7 @@ function Board({ data }) {
 }
 
 Board.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  data: arrayOf(arrayOf(number)).isRequired,
 };
 
 export default Board;
