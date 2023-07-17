@@ -2,7 +2,8 @@ export const Instructions = () => {
   return (
     <div className="dropdown">
       <pre>
-        {`*------------------------------------------------------------*
+        {`
+  *------------------------------------------------------------*
   *           Here are the instructions to the game!           *
   *------------------------------------------------------------*
   * 1. there are two players in the game (X and O)             *
