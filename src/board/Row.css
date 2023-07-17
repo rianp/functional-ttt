@@ -1,0 +1,5 @@
+.row {
+  --num-columns: 3;
+  display: grid;
+  grid-template-columns: repeat(var(--num-columns), 1fr);
+}
