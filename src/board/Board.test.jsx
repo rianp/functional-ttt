@@ -2,13 +2,7 @@ import { screen, render } from "@testing-library/react";
 import Board from "./Board";
 
 test("has the correct number of rows", () => {
-  const data = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-  ];
-
-  render(<Board data={data} />);
+  render(<Board changeTurn={jest.fn()} currentPlayer={"x"} />);
 
   expect(screen.getByText("1")).toBeInTheDocument();
   expect(screen.getByText("2")).toBeInTheDocument();

@@ -1,21 +1,20 @@
+import React, { useState } from "react";
 import "./App.css";
 import Board from "./board/Board";
-import { changeTurn } from "./players/Players";
-import { updateBoard } from "./board/Board";
-import { boardData } from "./board/BoardData";
-import React, { useState } from "react";
-
 import { Instructions } from "./instructions/Instructions";
 import InstructionsButton from "./instructions/InstructionsButton";
 
-export default function App() {
-  const [updatedBoardData, setUpdatedBoardData] = useState(boardData);
+const players = ["x", "o"];
 
-  const handleClick = (cellValue) => {
-    let turn = changeTurn();
-    setUpdatedBoardData((prevBoardData) =>
-      updateBoard(prevBoardData, cellValue, turn)
-    );
+export default function App() {
+  const [turnIndex, setTurnIndex] = useState(0);
+  const [currentPlayer, setCurrentPlayer] = useState("x");
+
+  const changeTurn = () => {
+    const updatedIndex = (turnIndex + 1) % players.length;
+    const updatedPlayer = players[updatedIndex];
+    setTurnIndex(updatedIndex);
+    setCurrentPlayer(updatedPlayer);
   };
 
   return (
@@ -27,7 +26,7 @@ export default function App() {
         </InstructionsButton>
       </header>
       <div className="App-body">
-        <Board data={updatedBoardData} handleClick={handleClick} />
+        <Board changeTurn={changeTurn} currentPlayer={currentPlayer} />
       </div>
     </div>
   );

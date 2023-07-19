@@ -1,13 +1,27 @@
+import React, { useState } from "react";
 import Row from "./Row";
 import "./Board.css";
-// import { changeTurn } from "../players/Players";
 import PropTypes from "prop-types";
-const { arrayOf, string } = PropTypes;
 
-function Board({ data, handleClick }) {
+const defaultBoardData = [
+  ["1", "2", "3"],
+  ["4", "5", "6"],
+  ["7", "8", "9"],
+];
+
+function Board({ changeTurn, currentPlayer }) {
+  const [boardData, setBoardData] = useState(defaultBoardData);
+
+  const handleClick = (cellValue) => {
+    const updatedBoard = updateBoard(boardData, cellValue, currentPlayer);
+    setBoardData(updatedBoard);
+
+    changeTurn();
+  };
+
   return (
     <div className="board">
-      {data.map((row, index) => (
+      {boardData.map((row, index) => (
         <Row
           key={index}
           row={row}
@@ -30,8 +44,8 @@ export function updateBoard(board, value, turn) {
 }
 
 Board.propTypes = {
-  data: arrayOf(arrayOf(string)).isRequired,
-  handleClick: PropTypes.func.isRequired,
+  changeTurn: PropTypes.func.isRequired,
+  currentPlayer: PropTypes.string.isRequired,
 };
 
 export default Board;
