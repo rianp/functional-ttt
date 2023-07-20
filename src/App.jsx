@@ -3,12 +3,16 @@ import "./App.css";
 import Board from "./board/Board";
 import { Instructions } from "./instructions/Instructions";
 import InstructionsButton from "./instructions/InstructionsButton";
+import {
+  calculateCurrentPlayerId,
+  calculateCurrentPlayerMark,
+} from "./changeTurn";
 
 export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
 
   const changeTurn = () => {
-    const updatedPlayerId = Math.abs(currentPlayerId - 1);
+    const updatedPlayerId = calculateCurrentPlayerId(currentPlayerId);
     setCurrentPlayerId(updatedPlayerId);
   };
 
@@ -23,7 +27,7 @@ export default function App() {
       <div className="App-body">
         <Board
           changeTurn={changeTurn}
-          currentPlayer={currentPlayerId === 0 ? "x" : "o"}
+          currentPlayer={calculateCurrentPlayerMark(currentPlayerId)}
         />
       </div>
     </div>
