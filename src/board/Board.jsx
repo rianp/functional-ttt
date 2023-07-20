@@ -22,12 +22,7 @@ function Board({ changeTurn, currentPlayer }) {
   return (
     <div className="board">
       {boardData.map((row, index) => (
-        <Row
-          key={index}
-          row={row}
-          handleClick={handleClick}
-          data-testid="row"
-        />
+        <Row key={index} row={row} handleClick={handleClick} />
       ))}
     </div>
   );

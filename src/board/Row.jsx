@@ -7,7 +7,12 @@ function Row({ row, handleClick }) {
     <div className="row">
       {row.map((cellValue, index) => {
         return (
-          <Cell key={index} cellValue={cellValue} handleClick={handleClick} />
+          <Cell
+            key={index}
+            cellValue={cellValue}
+            handleClick={handleClick}
+            data-testid="cell"
+          />
         );
       })}
     </div>

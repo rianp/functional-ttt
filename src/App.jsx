@@ -4,17 +4,12 @@ import Board from "./board/Board";
 import { Instructions } from "./instructions/Instructions";
 import InstructionsButton from "./instructions/InstructionsButton";
 
-const players = ["x", "o"];
-
 export default function App() {
-  const [turnIndex, setTurnIndex] = useState(0);
-  const [currentPlayer, setCurrentPlayer] = useState("x");
+  const [currentPlayerId, setCurrentPlayerId] = useState(0);
 
   const changeTurn = () => {
-    const updatedIndex = (turnIndex + 1) % players.length;
-    const updatedPlayer = players[updatedIndex];
-    setTurnIndex(updatedIndex);
-    setCurrentPlayer(updatedPlayer);
+    const updatedPlayerId = Math.abs(currentPlayerId - 1);
+    setCurrentPlayerId(updatedPlayerId);
   };
 
   return (
@@ -26,7 +21,10 @@ export default function App() {
         </InstructionsButton>
       </header>
       <div className="App-body">
-        <Board changeTurn={changeTurn} currentPlayer={currentPlayer} />
+        <Board
+          changeTurn={changeTurn}
+          currentPlayer={currentPlayerId === 0 ? "x" : "o"}
+        />
       </div>
     </div>
   );

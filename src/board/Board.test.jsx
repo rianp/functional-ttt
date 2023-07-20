@@ -1,4 +1,4 @@
-import { screen, render } from "@testing-library/react";
+import { screen, render, fireEvent } from "@testing-library/react";
 import Board from "./Board";
 
 test("has the correct number of rows", () => {
@@ -13,4 +13,14 @@ test("has the correct number of rows", () => {
   expect(screen.getByText("7")).toBeInTheDocument();
   expect(screen.getByText("8")).toBeInTheDocument();
   expect(screen.getByText("9")).toBeInTheDocument();
+});
+
+test("board is updated with correct marker", () => {
+  const mockChangeTurn = jest.fn();
+  const { container } = render(
+    <Board changeTurn={mockChangeTurn} currentPlayer="z" />
+  );
+
+  fireEvent.click(container.querySelector(".cell"));
+  expect(screen.getByText("z")).toBeInTheDocument();
 });
