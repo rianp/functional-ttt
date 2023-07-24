@@ -18,7 +18,16 @@ test("has the correct number of rows", () => {
 describe("when user clicks a cell", () => {
   test("board is updated with correct marker", () => {
     const mockChangeTurn = jest.fn();
-    render(<Board changeTurn={mockChangeTurn} currentPlayer="z" />);
+    const mockShowAlert = jest.fn();
+    const mockCloseAlert = jest.fn();
+    render(
+      <Board
+        showAlert={mockShowAlert}
+        closeAlert={mockCloseAlert}
+        changeTurn={mockChangeTurn}
+        currentPlayer="z"
+      />
+    );
 
     const cellOne = screen.getByText("1");
 
@@ -29,7 +38,16 @@ describe("when user clicks a cell", () => {
 
   test("changes turn", () => {
     const mockChangeTurn = jest.fn();
-    render(<Board changeTurn={mockChangeTurn} currentPlayer="z" />);
+    const mockShowAlert = jest.fn();
+    const mockCloseAlert = jest.fn();
+    render(
+      <Board
+        showAlert={mockShowAlert}
+        closeAlert={mockCloseAlert}
+        changeTurn={mockChangeTurn}
+        currentPlayer="z"
+      />
+    );
 
     const cellOne = screen.getByText("1");
 
@@ -39,7 +57,16 @@ describe("when user clicks a cell", () => {
 
   test("other cells remain unchanged", () => {
     const mockChangeTurn = jest.fn();
-    render(<Board changeTurn={mockChangeTurn} currentPlayer="z" />);
+    const mockShowAlert = jest.fn();
+    const mockCloseAlert = jest.fn();
+    render(
+      <Board
+        showAlert={mockShowAlert}
+        closeAlert={mockCloseAlert}
+        changeTurn={mockChangeTurn}
+        currentPlayer="z"
+      />
+    );
 
     const cellOne = screen.getByText("1");
     const cellTwo = screen.getByText("2");

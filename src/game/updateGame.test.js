@@ -2,6 +2,7 @@ import { updateGame } from "./updateGame";
 
 describe("updateGame", () => {
   const showAlertMock = jest.fn();
+  const closeAlertMock = jest.fn();
   const updateBoardMock = jest.fn();
   const changeTurnMock = jest.fn();
   const currentPlayer = "X";
@@ -22,6 +23,7 @@ describe("updateGame", () => {
     updateBoardMock.mockReturnValueOnce(expectedUpdatedBoard);
     const updatedBoard = updateGame(
       showAlertMock,
+      closeAlertMock,
       cellValue,
       boardData,
       currentPlayer,
@@ -37,6 +39,7 @@ describe("updateGame", () => {
       currentPlayer
     );
     expect(showAlertMock).not.toHaveBeenCalled();
+    expect(closeAlertMock).toHaveBeenCalled();
   });
 
   it('should not update the board and not change turn if the cellValue is "X"', () => {
@@ -44,6 +47,7 @@ describe("updateGame", () => {
 
     const updatedBoard = updateGame(
       showAlertMock,
+      closeAlertMock,
       cellValue,
       boardData,
       currentPlayer,
@@ -62,6 +66,7 @@ describe("updateGame", () => {
 
     const updatedBoard = updateGame(
       showAlertMock,
+      closeAlertMock,
       cellValue,
       boardData,
       currentPlayer,

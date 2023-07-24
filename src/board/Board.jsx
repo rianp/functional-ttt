@@ -6,12 +6,13 @@ import { updateBoard } from "./updateBoard";
 import { updateGame } from "../game/updateGame";
 import PropTypes from "prop-types";
 
-function Board({ showAlert, changeTurn, currentPlayer }) {
+function Board({ showAlert, closeAlert, changeTurn, currentPlayer }) {
   const [boardData, setBoardData] = useState(defaultBoardData);
 
   const handleClick = (cellValue) => {
     const updatedBoard = updateGame(
       showAlert,
+      closeAlert,
       cellValue,
       boardData,
       currentPlayer,
