@@ -36,7 +36,19 @@ describe("when user clicks a cell", () => {
     fireEvent.click(cellOne);
     expect(mockChangeTurn).toHaveBeenCalled();
   });
-});
 
-// move update board and defaultBoard to their own files.
-//write unit tests for udpate baord function
+  test("other cells remain unchanged", () => {
+    const mockChangeTurn = jest.fn();
+    render(<Board changeTurn={mockChangeTurn} currentPlayer="z" />);
+
+    const cellOne = screen.getByText("1");
+    const cellTwo = screen.getByText("2");
+    const cellThree = screen.getByText("3");
+
+    fireEvent.click(cellOne);
+
+    expect(cellOne).toHaveTextContent("z");
+    expect(cellTwo).toHaveTextContent("2");
+    expect(cellThree).toHaveTextContent("3");
+  });
+});
