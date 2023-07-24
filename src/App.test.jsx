@@ -14,11 +14,11 @@ test("updates the currentPlayer", () => {
 
   fireEvent.click(cellOne);
   expect(screen.queryByText("1")).not.toBeInTheDocument();
-  expect(cellOne).toHaveTextContent("x");
+  expect(cellOne).toHaveTextContent("X");
 
   fireEvent.click(cellTwo);
   expect(screen.queryByText("2")).not.toBeInTheDocument();
-  expect(cellTwo).toHaveTextContent("o");
+  expect(cellTwo).toHaveTextContent("O");
 });
 
 // refactor to check that other cells arent changed

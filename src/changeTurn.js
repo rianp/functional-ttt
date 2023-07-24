@@ -12,6 +12,6 @@ export function calculateCurrentPlayerMark(currentPlayerId) {
     throw new Error("Invalid currentPlayerId. It should be either 0 or 1.");
   }
 
-  const currentPlayerMark = currentPlayerId === 0 ? "x" : "o";
+  const currentPlayerMark = currentPlayerId === 0 ? "X" : "O";
   return currentPlayerMark;
 }

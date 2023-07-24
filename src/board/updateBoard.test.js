@@ -39,7 +39,7 @@ describe("updateBoard", () => {
       ["4", "5", "6"],
       ["7", "8", "9"],
     ];
-    const value = "z";
+    const value = "30";
     const turn = "x";
 
     const updatedBoard = updateBoard(board, value, turn);

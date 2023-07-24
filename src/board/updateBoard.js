@@ -1,8 +1,6 @@
 export function updateBoard(board, value, turn) {
   const updatedBoard = board.map((row) =>
-    row.map((cell) =>
-      cell === value && value !== "x" && value !== "o" ? turn : cell
-    )
+    row.map((cell) => (cell === value ? turn : cell))
   );
 
   return updatedBoard;

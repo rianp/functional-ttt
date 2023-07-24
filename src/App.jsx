@@ -24,6 +24,7 @@ export default function App() {
           <Instructions />
         </InstructionsButton>
       </header>
+      <p>Current Player: {calculateCurrentPlayerMark(currentPlayerId)}</p>
       <div className="App-body">
         <Board
           changeTurn={changeTurn}

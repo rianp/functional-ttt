@@ -35,13 +35,13 @@ describe("calculateCurrentPlayerMark", () => {
   it('should return "x" when currentPlayerId is 0', () => {
     const currentPlayerId = 0;
     const result = calculateCurrentPlayerMark(currentPlayerId);
-    expect(result).toBe("x");
+    expect(result).toBe("X");
   });
 
   it('should return "o" when currentPlayerId is 1', () => {
     const currentPlayerId = 1;
     const result = calculateCurrentPlayerMark(currentPlayerId);
-    expect(result).toBe("o");
+    expect(result).toBe("O");
   });
 
   it("should throw an error message when currentPlayerId is not 0 or 1", () => {
