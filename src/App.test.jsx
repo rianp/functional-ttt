@@ -21,4 +21,14 @@ test("updates the currentPlayer", () => {
   expect(cellTwo).toHaveTextContent("O");
 });
 
-// refactor to check that other cells arent changed
+test("displays the alert message when showAlert is called", () => {
+  render(<App />);
+  const cellOne = screen.getByText("1");
+  fireEvent.click(cellOne);
+  fireEvent.click(cellOne);
+
+  const alertMessage = screen.getByText(
+    "Move already made. Please choose an empty cell."
+  );
+  expect(alertMessage).toBeInTheDocument();
+});

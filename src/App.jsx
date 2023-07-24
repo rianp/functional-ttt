@@ -7,13 +7,23 @@ import {
   calculateCurrentPlayerId,
   calculateCurrentPlayerMark,
 } from "./changeTurn";
+import Alert from "./alert/Alert";
 
 export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
+  const [isAlertVisible, setAlertVisible] = useState(false);
 
   const changeTurn = () => {
     const updatedPlayerId = calculateCurrentPlayerId(currentPlayerId);
     setCurrentPlayerId(updatedPlayerId);
+  };
+
+  const showAlert = () => {
+    setAlertVisible(true);
+  };
+
+  const closeAlert = () => {
+    setAlertVisible(false);
   };
 
   return (
@@ -25,8 +35,18 @@ export default function App() {
         </InstructionsButton>
       </header>
       <p>Current Player: {calculateCurrentPlayerMark(currentPlayerId)}</p>
+
       <div className="App-body">
+        <div>
+          {isAlertVisible && (
+            <Alert
+              message="Move already made. Please choose an empty cell."
+              onClose={closeAlert}
+            />
+          )}
+        </div>
         <Board
+          showAlert={showAlert}
           changeTurn={changeTurn}
           currentPlayer={calculateCurrentPlayerMark(currentPlayerId)}
         />

@@ -1,4 +1,5 @@
 export const updateGame = (
+  showAlert,
   cellValue,
   boardData,
   currentPlayer,
@@ -10,6 +11,8 @@ export const updateGame = (
   if (cellValue !== "X" && cellValue !== "O") {
     updatedBoard = updateBoard(boardData, cellValue, currentPlayer);
     changeTurn();
+  } else {
+    showAlert();
   }
 
   return updatedBoard;
