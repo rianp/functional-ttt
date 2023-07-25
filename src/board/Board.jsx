@@ -1,27 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Row from "./Row";
 import "./Board.css";
-import { defaultBoardData } from "./boardData";
-import { updateBoard } from "./updateBoard";
-import { updateGame } from "../game/updateGame";
-import PropTypes from "prop-types";
 
-function Board({ showAlert, closeAlert, changeTurn, currentPlayer }) {
-  const [boardData, setBoardData] = useState(defaultBoardData);
-
-  const handleClick = (cellValue) => {
-    const updatedBoard = updateGame(
-      showAlert,
-      closeAlert,
-      cellValue,
-      boardData,
-      currentPlayer,
-      changeTurn,
-      updateBoard
-    );
-    setBoardData(updatedBoard);
-  };
-
+function Board({ boardData, handleClick }) {
   return (
     <div className="board">
       {boardData.map((row, index) => (
@@ -30,10 +11,5 @@ function Board({ showAlert, closeAlert, changeTurn, currentPlayer }) {
     </div>
   );
 }
-
-Board.propTypes = {
-  changeTurn: PropTypes.func.isRequired,
-  currentPlayer: PropTypes.string.isRequired,
-};
 
 export default Board;

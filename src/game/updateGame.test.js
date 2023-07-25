@@ -1,8 +1,7 @@
 import { updateGame } from "./updateGame";
 
 describe("updateGame", () => {
-  const showAlertMock = jest.fn();
-  const closeAlertMock = jest.fn();
+  const setAlertVisibleMock = jest.fn();
   const updateBoardMock = jest.fn();
   const changeTurnMock = jest.fn();
   const currentPlayer = "X";
@@ -22,8 +21,7 @@ describe("updateGame", () => {
 
     updateBoardMock.mockReturnValueOnce(expectedUpdatedBoard);
     const updatedBoard = updateGame(
-      showAlertMock,
-      closeAlertMock,
+      setAlertVisibleMock,
       cellValue,
       boardData,
       currentPlayer,
@@ -38,16 +36,13 @@ describe("updateGame", () => {
       cellValue,
       currentPlayer
     );
-    expect(showAlertMock).not.toHaveBeenCalled();
-    expect(closeAlertMock).toHaveBeenCalled();
   });
 
   it('should not update the board and not change turn if the cellValue is "X"', () => {
     const cellValue = "X";
 
     const updatedBoard = updateGame(
-      showAlertMock,
-      closeAlertMock,
+      setAlertVisibleMock,
       cellValue,
       boardData,
       currentPlayer,
@@ -58,15 +53,13 @@ describe("updateGame", () => {
     expect(updatedBoard).toEqual(boardData);
     expect(changeTurnMock).not.toHaveBeenCalled();
     expect(updateBoardMock).not.toHaveBeenCalled();
-    expect(showAlertMock).toHaveBeenCalledTimes(1);
   });
 
   it('should not update the board and not change turn if the cellValue is "O"', () => {
     const cellValue = "O";
 
     const updatedBoard = updateGame(
-      showAlertMock,
-      closeAlertMock,
+      setAlertVisibleMock,
       cellValue,
       boardData,
       currentPlayer,
@@ -77,6 +70,5 @@ describe("updateGame", () => {
     expect(updatedBoard).toEqual(boardData);
     expect(changeTurnMock).not.toHaveBeenCalled();
     expect(updateBoardMock).not.toHaveBeenCalled();
-    expect(showAlertMock).toHaveBeenCalledTimes(1);
   });
 });

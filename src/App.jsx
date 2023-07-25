@@ -1,30 +1,25 @@
 import React, { useState } from "react";
 import "./App.css";
-import Board from "./board/Board";
+import Game from "./game/Game";
 import { Instructions } from "./instructions/Instructions";
 import InstructionsButton from "./instructions/InstructionsButton";
 import {
   calculateCurrentPlayerId,
   calculateCurrentPlayerMark,
 } from "./changeTurn";
-import Alert from "./alert/Alert";
+import Alert from "./validation/Alert";
 
 export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
   const [isAlertVisible, setAlertVisible] = useState(false);
 
   const changeTurn = () => {
-    const updatedPlayerId = calculateCurrentPlayerId(currentPlayerId);
-    setCurrentPlayerId(updatedPlayerId);
+    setCurrentPlayerId((prevPlayerId) =>
+      calculateCurrentPlayerId(prevPlayerId)
+    );
   };
 
-  const showAlert = () => {
-    setAlertVisible(true);
-  };
-
-  const closeAlert = () => {
-    setAlertVisible(false);
-  };
+  const currentPlayerMark = calculateCurrentPlayerMark(currentPlayerId);
 
   return (
     <div className="App">
@@ -34,22 +29,24 @@ export default function App() {
           <Instructions />
         </InstructionsButton>
       </header>
-      <p>Current Player: {calculateCurrentPlayerMark(currentPlayerId)}</p>
-
       <div className="App-body">
+        <div className="game-state">
+          <div className="game-state-data">
+            Current Player: {currentPlayerMark}
+          </div>
+        </div>
         <div>
           {isAlertVisible && (
             <Alert
               message="Move already made. Please choose an empty cell."
-              onClose={closeAlert}
+              onClose={() => setAlertVisible(false)}
             />
           )}
         </div>
-        <Board
-          showAlert={showAlert}
-          closeAlert={closeAlert}
+        <Game
+          setAlertVisible={setAlertVisible}
           changeTurn={changeTurn}
-          currentPlayer={calculateCurrentPlayerMark(currentPlayerId)}
+          currentPlayer={currentPlayerMark}
         />
       </div>
     </div>

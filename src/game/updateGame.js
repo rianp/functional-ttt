@@ -1,21 +1,18 @@
+import { isValid } from "../validation/isValid";
+
 export const updateGame = (
-  showAlert,
-  closeAlert,
+  setAlertVisible,
   cellValue,
   boardData,
   currentPlayer,
   changeTurn,
   updateBoard
 ) => {
-  let updatedBoard = boardData;
-
-  if (cellValue !== "X" && cellValue !== "O") {
-    closeAlert();
-    updatedBoard = updateBoard(boardData, cellValue, currentPlayer);
+  if (isValid(cellValue, setAlertVisible)) {
+    const updatedBoard = updateBoard(boardData, cellValue, currentPlayer);
     changeTurn();
-  } else {
-    showAlert();
+    return updatedBoard;
   }
 
-  return updatedBoard;
+  return boardData;
 };
