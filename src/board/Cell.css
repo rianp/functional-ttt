@@ -9,4 +9,8 @@
   font-weight: bold;
   color: darkred;
   aspect-ratio: 1/1;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.3),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.1);
 }
