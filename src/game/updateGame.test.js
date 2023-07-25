@@ -4,71 +4,69 @@ describe("updateGame", () => {
   const setAlertVisibleMock = jest.fn();
   const updateBoardMock = jest.fn();
   const changeTurnMock = jest.fn();
+  const setBoardDataMock = jest.fn();
   const currentPlayer = "X";
-  const boardData = [
-    ["X", "O", "3"],
-    ["4", "X", "O"],
-    ["O", "8", "X"],
-  ];
+  const boardData = [];
 
-  it('should update the board and change turn if the cellValue is not "X" or "O"', () => {
+  it("should update the board if the cellValue is not already taken", () => {
     const cellValue = "3";
-    const expectedUpdatedBoard = [
-      ["X", "O", "X"],
-      ["4", "X", "O"],
-      ["O", "8", "X"],
-    ];
 
-    updateBoardMock.mockReturnValueOnce(expectedUpdatedBoard);
-    const updatedBoard = updateGame(
+    updateGame(
       setAlertVisibleMock,
       cellValue,
       boardData,
       currentPlayer,
       changeTurnMock,
-      updateBoardMock
+      setBoardDataMock
     );
 
-    expect(updatedBoard).toEqual(expectedUpdatedBoard);
-    expect(changeTurnMock).toHaveBeenCalledTimes(1);
-    expect(updateBoardMock).toHaveBeenCalledWith(
-      boardData,
-      cellValue,
-      currentPlayer
+    expect(setBoardDataMock).toHaveBeenCalled(
+      updateBoardMock(boardData, cellValue, currentPlayer)
     );
   });
 
-  it('should not update the board and not change turn if the cellValue is "X"', () => {
+  it("should not update the board if the cellValue is already taken", () => {
     const cellValue = "X";
 
-    const updatedBoard = updateGame(
+    updateGame(
       setAlertVisibleMock,
       cellValue,
       boardData,
       currentPlayer,
       changeTurnMock,
-      updateBoardMock
+      setBoardDataMock
     );
 
-    expect(updatedBoard).toEqual(boardData);
-    expect(changeTurnMock).not.toHaveBeenCalled();
-    expect(updateBoardMock).not.toHaveBeenCalled();
+    expect(setBoardDataMock).not.toHaveBeenCalled();
   });
 
-  it('should not update the board and not change turn if the cellValue is "O"', () => {
+  it("should not change turns if the cellValue is already taken", () => {
     const cellValue = "O";
 
-    const updatedBoard = updateGame(
+    updateGame(
       setAlertVisibleMock,
       cellValue,
       boardData,
       currentPlayer,
       changeTurnMock,
-      updateBoardMock
+      setBoardDataMock
     );
 
-    expect(updatedBoard).toEqual(boardData);
     expect(changeTurnMock).not.toHaveBeenCalled();
-    expect(updateBoardMock).not.toHaveBeenCalled();
+  });
+
+  it("should change turns if the cellValue is not already taken", () => {
+    const cellValue = "3";
+
+    updateGame(
+      setAlertVisibleMock,
+      cellValue,
+      boardData,
+      currentPlayer,
+      changeTurnMock,
+      setBoardDataMock
+    );
+
+    expect(changeTurnMock).toHaveBeenCalledTimes(1);
   });
 });

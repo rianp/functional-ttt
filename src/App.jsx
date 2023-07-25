@@ -6,8 +6,8 @@ import InstructionsButton from "./instructions/InstructionsButton";
 import {
   calculateCurrentPlayerId,
   calculateCurrentPlayerMark,
-} from "./changeTurn";
-import Alert from "./validation/Alert";
+} from "./game/changeTurn";
+import Alert from "./common/components/Alert";
 
 export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
@@ -36,12 +36,7 @@ export default function App() {
           </div>
         </div>
         <div>
-          {isAlertVisible && (
-            <Alert
-              message="Move already made. Please choose an empty cell."
-              onClose={() => setAlertVisible(false)}
-            />
-          )}
+          {isAlertVisible && <Alert onClose={() => setAlertVisible(false)} />}
         </div>
         <Game
           setAlertVisible={setAlertVisible}

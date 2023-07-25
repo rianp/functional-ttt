@@ -1,4 +1,5 @@
 import { isValid } from "../validation/isValid";
+import { updateBoard } from "../board/updateBoard";
 
 export const updateGame = (
   setAlertVisible,
@@ -6,13 +7,10 @@ export const updateGame = (
   boardData,
   currentPlayer,
   changeTurn,
-  updateBoard
+  setBoardData
 ) => {
   if (isValid(cellValue, setAlertVisible)) {
-    const updatedBoard = updateBoard(boardData, cellValue, currentPlayer);
+    setBoardData(updateBoard(boardData, cellValue, currentPlayer));
     changeTurn();
-    return updatedBoard;
   }
-
-  return boardData;
 };

@@ -1,4 +1,4 @@
-import { updateBoard } from "./updateBoard"; // Replace "./your-functions-file" with the actual path to your functions file.
+import { updateBoard } from "./updateBoard";
 
 describe("updateBoard", () => {
   it("should update the board correctly with the provided value", () => {

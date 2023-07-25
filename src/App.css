@@ -57,6 +57,7 @@
   --num-columns: 2;
   display: grid;
   grid-template-columns: repeat(var(--num-columns), 1fr);
+  margin: 10px 0px 10px 0px;
   background-color: pink;
   border: 1px solid darkred;
   padding: 10px;

@@ -4,7 +4,7 @@ import App from "./App";
 test("displays the Tic-Tac-Toe header", () => {
   render(<App />);
   const headerElement = screen.getByText(/Tic-Tac-Toe/i);
-  expect(headerElement).toBeInTheDocument();
+  expect(headerElement).toBeVisible();
 });
 
 test("updates the currentPlayer", () => {
@@ -30,5 +30,5 @@ test("displays the alert message when showAlert is called", () => {
   const alertMessage = screen.getByText(
     "Move already made. Please choose an empty cell."
   );
-  expect(alertMessage).toBeInTheDocument();
+  expect(alertMessage).toBeVisible();
 });

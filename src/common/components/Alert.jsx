@@ -1,10 +1,10 @@
 import React from "react";
 import "./Alert.css";
 
-const Alert = ({ message, onClose }) => {
+const Alert = ({ onClose }) => {
   return (
     <div className="alert">
-      {message}
+      Move already made. Please choose an empty cell.
       <span className="alert-close-btn" onClick={onClose}>
         close
       </span>
