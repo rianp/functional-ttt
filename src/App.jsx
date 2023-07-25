@@ -11,11 +11,11 @@ import Alert from "./common/components/Alert";
 
 export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
-  const [isAlertVisible, setAlertVisible] = useState(false);
+  const [isAlertVisible, setAlert] = useState(false);
 
-  const changeTurn = () => {
+  const changeTurn = (cellValue) => {
     setCurrentPlayerId((prevPlayerId) =>
-      calculateCurrentPlayerId(prevPlayerId)
+      calculateCurrentPlayerId(prevPlayerId, cellValue, setAlert)
     );
   };
 
@@ -35,11 +35,9 @@ export default function App() {
             Current Player: {currentPlayerMark}
           </div>
         </div>
-        <div>
-          {isAlertVisible && <Alert onClose={() => setAlertVisible(false)} />}
-        </div>
+        <div>{isAlertVisible && <Alert onClose={() => setAlert(false)} />}</div>
         <Game
-          setAlertVisible={setAlertVisible}
+          setAlertVisible={setAlert}
           changeTurn={changeTurn}
           currentPlayer={currentPlayerMark}
         />

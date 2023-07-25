@@ -1,25 +1,9 @@
-import React, { useState } from "react";
 import Board from "../board/Board";
-import { updateGame } from "../game/updateGame";
-import { defaultBoardData } from "../board/boardData";
 
-export const Game = ({ setAlertVisible, changeTurn, currentPlayer }) => {
-  const [boardData, setBoardData] = useState(defaultBoardData);
-
-  const handleClick = (cellValue) => {
-    updateGame(
-      setAlertVisible,
-      cellValue,
-      boardData,
-      currentPlayer,
-      changeTurn,
-      setBoardData
-    );
-  };
-
+export const Game = ({ changeTurn, currentPlayer }) => {
   return (
     <div>
-      <Board boardData={boardData} handleClick={handleClick} />
+      <Board changeTurn={changeTurn} currentPlayer={currentPlayer} />
     </div>
   );
 };
