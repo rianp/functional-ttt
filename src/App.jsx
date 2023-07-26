@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import Game from "./game/Game";
+import Board from "./board/Board";
 import { Instructions } from "./instructions/Instructions";
 import InstructionsButton from "./instructions/InstructionsButton";
 import {
@@ -36,7 +36,7 @@ export default function App() {
           </div>
         </div>
         <div>{isAlertVisible && <Alert onClose={() => setAlert(false)} />}</div>
-        <Game
+        <Board
           setAlertVisible={setAlert}
           changeTurn={changeTurn}
           currentPlayer={currentPlayerMark}
