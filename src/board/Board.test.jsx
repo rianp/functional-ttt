@@ -2,7 +2,13 @@ import { screen, render, fireEvent } from "@testing-library/react";
 import Board from "./Board";
 
 test("has the correct number of rows", () => {
-  render(<Board changeTurn={jest.fn()} currentPlayer={"some player"} />);
+  render(
+    <Board
+      changeTurn={jest.fn()}
+      currentPlayer={"some player"}
+      changeState={jest.fn()}
+    />
+  );
 
   expect(screen.getByText("1")).toBeVisible();
   expect(screen.getByText("2")).toBeVisible();
