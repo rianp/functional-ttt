@@ -17,7 +17,13 @@ test("has the correct number of rows", () => {
 
 describe("when user clicks a cell", () => {
   test("board is updated with correct marker", () => {
-    render(<Board changeTurn={jest.fn()} currentPlayer={"z"} />);
+    render(
+      <Board
+        changeTurn={jest.fn()}
+        currentPlayer={"z"}
+        changeState={jest.fn()}
+      />
+    );
 
     const cellOne = screen.getByText("1");
     fireEvent.click(cellOne);
@@ -28,7 +34,13 @@ describe("when user clicks a cell", () => {
 
   test("changes turn", () => {
     const mockChangeTurn = jest.fn();
-    render(<Board changeTurn={mockChangeTurn} currentPlayer={"some player"} />);
+    render(
+      <Board
+        changeTurn={mockChangeTurn}
+        currentPlayer={"some player"}
+        changeState={jest.fn()}
+      />
+    );
 
     const cellOne = screen.getByText("1");
     fireEvent.click(cellOne);
@@ -37,7 +49,13 @@ describe("when user clicks a cell", () => {
   });
 
   test("other cells remain unchanged", () => {
-    render(<Board changeTurn={jest.fn()} currentPlayer={"z"} />);
+    render(
+      <Board
+        changeTurn={jest.fn()}
+        currentPlayer={"z"}
+        changeState={jest.fn()}
+      />
+    );
     const cellOne = screen.getByText("1");
     const cellTwo = screen.getByText("2");
     const cellThree = screen.getByText("3");

@@ -4,13 +4,15 @@ import "./Board.css";
 import { updateBoard } from "./updateBoard";
 import { defaultBoardData } from "../board/boardData";
 import PropTypes from "prop-types";
+import { getBoardState } from "./getBoardState";
 
-function Board({ changeTurn, currentPlayer }) {
+function Board({ changeTurn, currentPlayer, changeState }) {
   const [boardData, setBoardData] = useState(defaultBoardData);
 
   const handleBoardClick = (cellSpot) => {
     const board = updateBoard(boardData, cellSpot, currentPlayer);
     setBoardData(board);
+    changeState(getBoardState(board));
     changeTurn(cellSpot);
   };
 
@@ -26,6 +28,7 @@ function Board({ changeTurn, currentPlayer }) {
 Board.propTypes = {
   changeTurn: PropTypes.func.isRequired,
   currentPlayer: PropTypes.string.isRequired,
+  changeState: PropTypes.func.isRequired,
 };
 
 export default Board;

@@ -55,3 +55,67 @@ describe("alert message", () => {
     ).not.toBeInTheDocument();
   });
 });
+
+describe("display game status", () => {
+  test("displays game is ongoing when game isn't finished.", () => {
+    render(<App />);
+
+    expect(screen.queryByText("Game Status: Ongoing")).toBeVisible();
+  });
+
+  test("displays game is a draw when there is no winner.", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByText("1"));
+    fireEvent.click(screen.getByText("2"));
+    fireEvent.click(screen.getByText("3"));
+    fireEvent.click(screen.getByText("5"));
+    fireEvent.click(screen.getByText("4"));
+    fireEvent.click(screen.getByText("6"));
+    fireEvent.click(screen.getByText("8"));
+    fireEvent.click(screen.getByText("7"));
+    fireEvent.click(screen.getByText("9"));
+
+    expect(screen.getByText("Game Status: Draw")).toBeVisible();
+  });
+
+  test("displays game winner is X when player X has won horizontally.", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByText("1"));
+    fireEvent.click(screen.getByText("4"));
+    fireEvent.click(screen.getByText("2"));
+    fireEvent.click(screen.getByText("5"));
+    fireEvent.click(screen.getByText("3"));
+
+    expect(screen.getByText("Game Status: Winner is X")).toBeVisible();
+  });
+
+  test("displays game winner is X when player X has won vertically.", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByText("1"));
+    fireEvent.click(screen.getByText("5"));
+    fireEvent.click(screen.getByText("4"));
+    fireEvent.click(screen.getByText("6"));
+    fireEvent.click(screen.getByText("7"));
+
+    expect(screen.getByText("Game Status: Winner is X")).toBeVisible();
+  });
+
+  test("displays game winner is X when player X has won diagonally.", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByText("1"));
+    fireEvent.click(screen.getByText("2"));
+    fireEvent.click(screen.getByText("3"));
+    fireEvent.click(screen.getByText("4"));
+    fireEvent.click(screen.getByText("5"));
+    fireEvent.click(screen.getByText("6"));
+    fireEvent.click(screen.getByText("7"));
+    fireEvent.click(screen.getByText("8"));
+    fireEvent.click(screen.getByText("9"));
+
+    expect(screen.getByText("Game Status: Winner is X")).toBeVisible();
+  });
+});

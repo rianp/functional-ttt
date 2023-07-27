@@ -8,10 +8,12 @@ import {
   calculateCurrentPlayerMark,
 } from "./game/changeTurn";
 import Alert from "./common/components/Alert";
+import { displayGameStatus } from "./game/displayGameStatus";
 
 export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
   const [isValidMove, setIsValidMove] = useState(true);
+  const [boardState, setBoardState] = useState("Ongoing");
 
   const changeTurn = (cellSpot) => {
     setCurrentPlayerId((prevPlayerId) =>
@@ -20,6 +22,10 @@ export default function App() {
   };
 
   const currentPlayerMark = calculateCurrentPlayerMark(currentPlayerId);
+
+  const changeState = (state) => {
+    setBoardState(state);
+  };
 
   return (
     <div className="App">
@@ -34,11 +40,18 @@ export default function App() {
           <div className="game-state-data">
             Current Player: {currentPlayerMark}
           </div>
+          <div className="game-state-data">
+            Game Status: {displayGameStatus(boardState)}
+          </div>
         </div>
         <div>
           {!isValidMove && <Alert onClose={() => setIsValidMove(true)} />}
         </div>
-        <Board changeTurn={changeTurn} currentPlayer={currentPlayerMark} />
+        <Board
+          changeTurn={changeTurn}
+          currentPlayer={currentPlayerMark}
+          changeState={changeState}
+        />
       </div>
     </div>
   );
