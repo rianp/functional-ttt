@@ -3,8 +3,8 @@ import App from "./App";
 
 test("displays the Tic-Tac-Toe header", () => {
   render(<App />);
-  const headerElement = screen.getByText(/Tic-Tac-Toe/i);
-  expect(headerElement).toBeVisible();
+
+  expect(screen.getByText(/Tic-Tac-Toe/i)).toBeVisible();
 });
 
 test("updates the currentPlayer", () => {
@@ -21,14 +21,37 @@ test("updates the currentPlayer", () => {
   expect(cellTwo).toHaveTextContent("O");
 });
 
-test("displays the alert message when showAlert is called", () => {
-  render(<App />);
-  const cellOne = screen.getByText("1");
-  fireEvent.click(cellOne);
-  fireEvent.click(cellOne);
+describe("alert message", () => {
+  test("doesn't display alert on initial load.", () => {
+    render(<App />);
 
-  const alertMessage = screen.getByText(
-    "Move already made. Please choose an empty cell."
-  );
-  expect(alertMessage).toBeVisible();
+    expect(
+      screen.queryByText("Move already made. Please choose an empty cell.")
+    ).not.toBeInTheDocument();
+  });
+
+  test("displays the alert message when an invalid move is made", () => {
+    render(<App />);
+    const cellOne = screen.getByText("1");
+
+    fireEvent.click(cellOne);
+    fireEvent.click(cellOne);
+
+    expect(
+      screen.getByText("Move already made. Please choose an empty cell.")
+    ).toBeVisible();
+  });
+
+  test("closes alert when the close button is clicked.", () => {
+    render(<App />);
+    const cellOne = screen.getByText("1");
+
+    fireEvent.click(cellOne);
+    fireEvent.click(cellOne);
+    fireEvent.click(screen.getByText("close"));
+
+    expect(
+      screen.queryByText("Move already made. Please choose an empty cell.")
+    ).not.toBeInTheDocument();
+  });
 });

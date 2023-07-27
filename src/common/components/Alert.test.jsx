@@ -6,11 +6,9 @@ describe("Alert Component", () => {
   it("should render the message correctly", () => {
     render(<Alert onClose={jest.fn()} />);
 
-    const messageElement = screen.getByText(
-      "Move already made. Please choose an empty cell."
-    );
-
-    expect(messageElement).toBeVisible();
+    expect(
+      screen.getByText("Move already made. Please choose an empty cell.")
+    ).toBeVisible();
   });
 
   it("should close message when close button is clicked", () => {
@@ -21,7 +19,5 @@ describe("Alert Component", () => {
     fireEvent.click(closeButton);
 
     expect(onCloseMock).toHaveBeenCalledTimes(1);
-    expect("Move already made. Please choose an empty cell.").not
-      .toBeInTheDocument;
   });
 });

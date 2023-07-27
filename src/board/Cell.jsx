@@ -1,16 +1,16 @@
 import "./Cell.css";
 import PropTypes from "prop-types";
 
-function Cell({ cellValue, handleClick }) {
+function Cell({ cellSpot, handleClick }) {
   return (
-    <div className="cell" onClick={() => handleClick(cellValue)}>
-      {cellValue}
+    <div className="cell" onClick={() => handleClick(cellSpot)}>
+      {cellSpot}
     </div>
   );
 }
 
 Cell.propTypes = {
-  cellValue: PropTypes.string.isRequired,
+  cellSpot: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 

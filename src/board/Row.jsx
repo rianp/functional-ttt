@@ -5,14 +5,9 @@ import PropTypes from "prop-types";
 function Row({ row, handleClick }) {
   return (
     <div className="row">
-      {row.map((cellValue, index) => {
+      {row.map((cellSpot, index) => {
         return (
-          <Cell
-            key={index}
-            cellValue={cellValue}
-            handleClick={handleClick}
-            data-testid="cell"
-          />
+          <Cell key={index} cellSpot={cellSpot} handleClick={handleClick} />
         );
       })}
     </div>

@@ -3,19 +3,19 @@ import Cell from "./Cell";
 import userEvent from "@testing-library/user-event";
 
 test("display a value in a cell", () => {
-  render(<Cell cellValue={"abc"} handleClick={jest.fn()} />);
+  render(<Cell cellSpot={"abc"} handleClick={jest.fn()} />);
 
   expect(screen.getByText("abc")).toBeVisible();
 });
 
 test("handles click", () => {
   const handleClickMock = jest.fn();
-  const cellValue = "abc";
+  const cellSpot = "abc";
 
-  render(<Cell cellValue={cellValue} handleClick={handleClickMock} />);
+  render(<Cell cellSpot={cellSpot} handleClick={handleClickMock} />);
 
   const cell = screen.getByText("abc");
   userEvent.click(cell);
 
-  expect(handleClickMock).toHaveBeenCalledWith(cellValue);
+  expect(handleClickMock).toHaveBeenCalledWith(cellSpot);
 });

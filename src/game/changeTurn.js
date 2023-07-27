@@ -1,11 +1,11 @@
-import { isValid } from "../validation/isValid";
+import { validateMove } from "../validation/validateMove";
 
-export function calculateCurrentPlayerId(currentPlayerId, cellValue, setAlert) {
-  if (currentPlayerId !== 0 && currentPlayerId !== 1) {
-    throw new Error("Invalid currentPlayerId. It should be either 0 or 1.");
-  }
-
-  if (isValid(cellValue, setAlert)) {
+export function calculateNextPlayerId(
+  currentPlayerId,
+  cellSpot,
+  setIsValidMove
+) {
+  if (validateMove(cellSpot, setIsValidMove)) {
     const updatedPlayerId = Math.abs(currentPlayerId - 1);
     return updatedPlayerId;
   }
@@ -14,10 +14,5 @@ export function calculateCurrentPlayerId(currentPlayerId, cellValue, setAlert) {
 }
 
 export function calculateCurrentPlayerMark(currentPlayerId) {
-  if (currentPlayerId !== 0 && currentPlayerId !== 1) {
-    throw new Error("Invalid currentPlayerId. It should be either 0 or 1.");
-  }
-
-  const currentPlayerMark = currentPlayerId === 0 ? "X" : "O";
-  return currentPlayerMark;
+  return currentPlayerId === 0 ? "X" : "O";
 }

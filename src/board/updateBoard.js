@@ -1,7 +1,9 @@
-export function updateBoard(board, value, turn) {
-  if (value === "X" || value === "O") {
+export function updateBoard(board, cellSpot, currentPlayer) {
+  if (cellSpot === "X" || cellSpot === "O") {
     return board;
   }
 
-  return board.map((row) => row.map((cell) => (cell === value ? turn : cell)));
+  return board.map((row) =>
+    row.map((cell) => (cell === cellSpot ? currentPlayer : cell))
+  );
 }

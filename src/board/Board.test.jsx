@@ -2,13 +2,7 @@ import { screen, render, fireEvent } from "@testing-library/react";
 import Board from "./Board";
 
 test("has the correct number of rows", () => {
-  const boardData = [
-    ["1", "2", "3"],
-    ["4", "5", "6"],
-    ["7", "8", "9"],
-  ];
-
-  render(<Board boardData={boardData} handleClick={() => {}} />);
+  render(<Board changeTurn={jest.fn()} currentPlayer={"some player"} />);
 
   expect(screen.getByText("1")).toBeVisible();
   expect(screen.getByText("2")).toBeVisible();
@@ -23,14 +17,7 @@ test("has the correct number of rows", () => {
 
 describe("when user clicks a cell", () => {
   test("board is updated with correct marker", () => {
-    const mockChangeTurn = jest.fn();
-    render(
-      <Board
-        setAlertVisible={jest.fn()}
-        changeTurn={mockChangeTurn}
-        currentPlayer="z"
-      />
-    );
+    render(<Board changeTurn={jest.fn()} currentPlayer={"z"} />);
 
     const cellOne = screen.getByText("1");
     fireEvent.click(cellOne);
@@ -41,13 +28,7 @@ describe("when user clicks a cell", () => {
 
   test("changes turn", () => {
     const mockChangeTurn = jest.fn();
-    render(
-      <Board
-        setAlertVisible={jest.fn()}
-        changeTurn={mockChangeTurn}
-        currentPlayer="z"
-      />
-    );
+    render(<Board changeTurn={mockChangeTurn} currentPlayer={"some player"} />);
 
     const cellOne = screen.getByText("1");
     fireEvent.click(cellOne);
@@ -56,18 +37,11 @@ describe("when user clicks a cell", () => {
   });
 
   test("other cells remain unchanged", () => {
-    const mockChangeTurn = jest.fn();
-    render(
-      <Board
-        setAlertVisible={jest.fn()}
-        changeTurn={mockChangeTurn}
-        currentPlayer="z"
-      />
-    );
-
+    render(<Board changeTurn={jest.fn()} currentPlayer={"z"} />);
     const cellOne = screen.getByText("1");
     const cellTwo = screen.getByText("2");
     const cellThree = screen.getByText("3");
+
     fireEvent.click(cellOne);
 
     expect(cellOne).toHaveTextContent("z");

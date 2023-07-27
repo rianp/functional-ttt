@@ -4,18 +4,18 @@ import Board from "./board/Board";
 import { Instructions } from "./instructions/Instructions";
 import InstructionsButton from "./instructions/InstructionsButton";
 import {
-  calculateCurrentPlayerId,
+  calculateNextPlayerId,
   calculateCurrentPlayerMark,
 } from "./game/changeTurn";
 import Alert from "./common/components/Alert";
 
 export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
-  const [isAlertVisible, setAlert] = useState(false);
+  const [isValidMove, setIsValidMove] = useState(true);
 
-  const changeTurn = (cellValue) => {
+  const changeTurn = (cellSpot) => {
     setCurrentPlayerId((prevPlayerId) =>
-      calculateCurrentPlayerId(prevPlayerId, cellValue, setAlert)
+      calculateNextPlayerId(prevPlayerId, cellSpot, setIsValidMove)
     );
   };
 
@@ -35,12 +35,10 @@ export default function App() {
             Current Player: {currentPlayerMark}
           </div>
         </div>
-        <div>{isAlertVisible && <Alert onClose={() => setAlert(false)} />}</div>
-        <Board
-          setAlertVisible={setAlert}
-          changeTurn={changeTurn}
-          currentPlayer={currentPlayerMark}
-        />
+        <div>
+          {!isValidMove && <Alert onClose={() => setIsValidMove(true)} />}
+        </div>
+        <Board changeTurn={changeTurn} currentPlayer={currentPlayerMark} />
       </div>
     </div>
   );

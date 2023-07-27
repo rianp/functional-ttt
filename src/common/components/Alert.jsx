@@ -1,5 +1,6 @@
 import React from "react";
 import "./Alert.css";
+import PropTypes from "prop-types";
 
 const Alert = ({ onClose }) => {
   return (
@@ -10,6 +11,10 @@ const Alert = ({ onClose }) => {
       </span>
     </div>
   );
+};
+
+Alert.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Alert;
