@@ -1,11 +1,26 @@
+import React, { useState } from "react";
 import "./App.css";
 import Board from "./board/Board";
-import { boardData } from "./board/BoardData";
-
 import { Instructions } from "./instructions/Instructions";
 import InstructionsButton from "./instructions/InstructionsButton";
+import {
+  calculateNextPlayerId,
+  calculateCurrentPlayerMark,
+} from "./game/changeTurn";
+import Alert from "./common/components/Alert";
 
 export default function App() {
+  const [currentPlayerId, setCurrentPlayerId] = useState(0);
+  const [isValidMove, setIsValidMove] = useState(true);
+
+  const changeTurn = (cellSpot) => {
+    setCurrentPlayerId((prevPlayerId) =>
+      calculateNextPlayerId(prevPlayerId, cellSpot, setIsValidMove)
+    );
+  };
+
+  const currentPlayerMark = calculateCurrentPlayerMark(currentPlayerId);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -15,7 +30,15 @@ export default function App() {
         </InstructionsButton>
       </header>
       <div className="App-body">
-        <Board data={boardData} />
+        <div className="game-state">
+          <div className="game-state-data">
+            Current Player: {currentPlayerMark}
+          </div>
+        </div>
+        <div>
+          {!isValidMove && <Alert onClose={() => setIsValidMove(true)} />}
+        </div>
+        <Board changeTurn={changeTurn} currentPlayer={currentPlayerMark} />
       </div>
     </div>
   );

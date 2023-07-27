@@ -51,3 +51,18 @@
     transform: rotate(360deg);
   }
 }
+
+.game-state {
+  max-width: 70vh;
+  --num-columns: 2;
+  display: grid;
+  grid-template-columns: repeat(var(--num-columns), 1fr);
+  margin: 10px 0px 10px 0px;
+  background-color: pink;
+  border: 1px solid darkred;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.3),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.1);
+}
