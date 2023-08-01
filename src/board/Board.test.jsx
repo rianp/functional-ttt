@@ -7,6 +7,7 @@ test("has the correct number of rows", () => {
       changeTurn={jest.fn()}
       currentPlayer={"some player"}
       changeStatus={jest.fn()}
+      size={3}
     />
   );
 
@@ -28,6 +29,7 @@ describe("when user clicks a cell", () => {
         changeTurn={jest.fn()}
         currentPlayer={"z"}
         changeStatus={jest.fn()}
+        size={3}
       />
     );
 
@@ -45,6 +47,7 @@ describe("when user clicks a cell", () => {
         changeTurn={mockChangeTurn}
         currentPlayer={"some player"}
         changeStatus={jest.fn()}
+        size={3}
       />
     );
 
@@ -60,6 +63,7 @@ describe("when user clicks a cell", () => {
         changeTurn={jest.fn()}
         currentPlayer={"z"}
         changeStatus={jest.fn()}
+        size={3}
       />
     );
     const cellOne = screen.getByText("1");

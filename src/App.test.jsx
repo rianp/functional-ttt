@@ -9,6 +9,8 @@ test("displays the Tic-Tac-Toe header", () => {
 
 test("updates the currentPlayer", () => {
   render(<App />);
+  const sizeButton = screen.getByText("3x3");
+  fireEvent.click(sizeButton);
   const cellOne = screen.getByText("1");
   const cellTwo = screen.getByText("2");
 
@@ -32,6 +34,8 @@ describe("alert message", () => {
 
   test("displays the alert message when an invalid move is made", () => {
     render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
     const cellOne = screen.getByText("1");
 
     fireEvent.click(cellOne);
@@ -44,6 +48,8 @@ describe("alert message", () => {
 
   test("closes alert when the close button is clicked.", () => {
     render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
     const cellOne = screen.getByText("1");
 
     fireEvent.click(cellOne);
@@ -59,12 +65,16 @@ describe("alert message", () => {
 describe("display game status", () => {
   test("displays game is ongoing when game isn't finished.", () => {
     render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
 
     expect(screen.queryByText("Game Status: Ongoing")).toBeVisible();
   });
 
   test("displays game is a draw when there is no winner.", () => {
     render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
 
     fireEvent.click(screen.getByText("1"));
     fireEvent.click(screen.getByText("2"));
@@ -81,6 +91,8 @@ describe("display game status", () => {
 
   test("displays game winner is X when player X has won horizontally.", () => {
     render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
 
     fireEvent.click(screen.getByText("1"));
     fireEvent.click(screen.getByText("4"));
@@ -93,6 +105,8 @@ describe("display game status", () => {
 
   test("displays game winner is X when player X has won vertically.", () => {
     render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
 
     fireEvent.click(screen.getByText("1"));
     fireEvent.click(screen.getByText("5"));
@@ -105,6 +119,8 @@ describe("display game status", () => {
 
   test("displays game winner is X when player X has won diagonally.", () => {
     render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
 
     fireEvent.click(screen.getByText("1"));
     fireEvent.click(screen.getByText("2"));
@@ -119,3 +135,31 @@ describe("display game status", () => {
     expect(screen.getByText("Game Status: Winner is X")).toBeVisible();
   });
 });
+
+// describe("isBoardChosen", () => {
+//   test("returns true when boardSize is null", () => {
+//     render(<App />);
+
+//     const isBoardChosenResult = screen
+//       .getByText(/Tic-Tac-Toe/i)
+//       .closest("div")
+//       .isBoardChosen();
+
+//     expect(isBoardChosenResult).toBe(true);
+//   });
+
+//   test("returns false when boardSize is not null", () => {
+//     render(<App />);
+
+//     act(() => {
+//       screen.getByText("3x3").click();
+//     });
+
+//     const isBoardChosenResult = screen
+//       .getByText(/Tic-Tac-Toe/i)
+//       .closest("div")
+//       .isBoardChosen();
+
+//     expect(isBoardChosenResult).toBe(false);
+//   });
+// });

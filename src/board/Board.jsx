@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Row from "./Row";
 import "./Board.css";
 import { updateBoard } from "./updateBoard";
-import { defaultBoardData } from "../board/boardData";
 import PropTypes from "prop-types";
 import { getBoardStatus } from "./getBoardStatus";
+import { buildBoard } from "./buildBoard";
 
-function Board({ changeTurn, currentPlayer, changeStatus }) {
-  const [boardData, setBoardData] = useState(defaultBoardData);
+function Board({ changeTurn, currentPlayer, changeStatus, size }) {
+  const [boardData, setBoardData] = useState(buildBoard(size));
 
   const handleBoardClick = (cellSpot) => {
     const board = updateBoard(boardData, cellSpot, currentPlayer);
@@ -19,7 +19,12 @@ function Board({ changeTurn, currentPlayer, changeStatus }) {
   return (
     <div className="board">
       {boardData.map((row, index) => (
-        <Row key={index} row={row} handleClick={handleBoardClick} />
+        <Row
+          key={index}
+          row={row}
+          handleClick={handleBoardClick}
+          boardSize={size}
+        />
       ))}
     </div>
   );
