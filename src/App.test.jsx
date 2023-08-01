@@ -8,13 +8,13 @@ test("displays the Tic-Tac-Toe header", () => {
 });
 
 describe("menu", () => {
-  test("displays at the start of the game", () => {
+  test("should display at the start of the game", () => {
     render(<App />);
 
     expect(screen.getByText("Select Board Size")).toBeVisible();
   });
 
-  test("isn't displayed after board size is chosen", () => {
+  test("should not be displayed after board size is chosen", () => {
     render(<App />);
     const sizeButton = screen.getByText("3x3");
     fireEvent.click(sizeButton);
@@ -24,7 +24,7 @@ describe("menu", () => {
 });
 
 describe("correctly sized board", () => {
-  test("is displayed when a 3x3 board is chosen", () => {
+  test("should be displayed when a 3x3 board is chosen", () => {
     render(<App />);
     const sizeButton = screen.getByText("3x3");
     fireEvent.click(sizeButton);
@@ -34,7 +34,7 @@ describe("correctly sized board", () => {
     expect(screen.queryByText("10")).not.toBeInTheDocument();
   });
 
-  test("is displayed when a 5x5 board is chosen", () => {
+  test("should be displayed when a 5x5 board is chosen", () => {
     render(<App />);
     const sizeButton = screen.getByText("5x5");
     fireEvent.click(sizeButton);
@@ -44,7 +44,7 @@ describe("correctly sized board", () => {
     expect(screen.queryByText("26")).not.toBeInTheDocument();
   });
 
-  test("isn't displayed when a board hasn't been chosen", () => {
+  test("should not be displayed when a board hasn't been chosen", () => {
     render(<App />);
 
     expect(screen.queryByText("1")).not.toBeInTheDocument();
