@@ -1,13 +1,15 @@
-import {
-  calculateNextPlayerId,
-  calculateCurrentPlayerMark,
-} from "./changeTurn";
+import { calculateNextPlayerId, calculateCurrentPlayerMark } from "./helpers";
 
 describe("calculateNextPlayerId", () => {
   it("should return 1 when currentPlayerId is 0", () => {
     const currentPlayerId = 0;
 
-    const result = calculateNextPlayerId(currentPlayerId, 9999, jest.fn());
+    const result = calculateNextPlayerId(
+      currentPlayerId,
+      9999,
+      jest.fn(),
+      "Ongoing"
+    );
 
     expect(result).toBe(1);
   });
@@ -15,7 +17,12 @@ describe("calculateNextPlayerId", () => {
   it("should return 0 when currentPlayerId is 1", () => {
     const currentPlayerId = 1;
 
-    const result = calculateNextPlayerId(currentPlayerId, 9999, jest.fn());
+    const result = calculateNextPlayerId(
+      currentPlayerId,
+      9999,
+      jest.fn(),
+      "Ongoing"
+    );
 
     expect(result).toBe(0);
   });
@@ -24,7 +31,25 @@ describe("calculateNextPlayerId", () => {
     const currentPlayerId = 0;
     const cellSpot = "X";
 
-    const result = calculateNextPlayerId(currentPlayerId, cellSpot, jest.fn());
+    const result = calculateNextPlayerId(
+      currentPlayerId,
+      cellSpot,
+      jest.fn(),
+      "Ongoing"
+    );
+
+    expect(result).toBe(currentPlayerId);
+  });
+
+  it("should not change currentPlayerId when game is over", () => {
+    const currentPlayerId = 0;
+
+    const result = calculateNextPlayerId(
+      currentPlayerId,
+      9999,
+      jest.fn(),
+      "Draw"
+    );
 
     expect(result).toBe(currentPlayerId);
   });

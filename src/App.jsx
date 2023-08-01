@@ -6,20 +6,32 @@ import InstructionsButton from "./instructions/InstructionsButton";
 import {
   calculateNextPlayerId,
   calculateCurrentPlayerMark,
-} from "./game/changeTurn";
-import Alert from "./common/components/Alert";
+} from "./game/helpers";
+import Alert, { shouldDisplayAlert } from "./common/components/Alert";
+import { displayGameStatus } from "./game/displayGameStatus";
+
+const GAME_STATUS = {
+  Ongoing: "Ongoing",
+  Won: "Won",
+  Draw: "Draw",
+};
 
 export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
   const [isValidMove, setIsValidMove] = useState(true);
+  const [gameStatus, setGameStatus] = useState(GAME_STATUS.Ongoing);
 
   const changeTurn = (cellSpot) => {
     setCurrentPlayerId((prevPlayerId) =>
-      calculateNextPlayerId(prevPlayerId, cellSpot, setIsValidMove)
+      calculateNextPlayerId(prevPlayerId, cellSpot, setIsValidMove, gameStatus)
     );
   };
 
   const currentPlayerMark = calculateCurrentPlayerMark(currentPlayerId);
+
+  const changeState = (gameStatus) => {
+    setGameStatus(gameStatus);
+  };
 
   return (
     <div className="App">
@@ -34,11 +46,20 @@ export default function App() {
           <div className="game-state-data">
             Current Player: {currentPlayerMark}
           </div>
+          <div className="game-state-data">
+            Game Status: {displayGameStatus(gameStatus)}
+          </div>
         </div>
         <div>
-          {!isValidMove && <Alert onClose={() => setIsValidMove(true)} />}
+          {shouldDisplayAlert(isValidMove, gameStatus) && (
+            <Alert onClose={() => setIsValidMove(true)} />
+          )}
         </div>
-        <Board changeTurn={changeTurn} currentPlayer={currentPlayerMark} />
+        <Board
+          changeTurn={changeTurn}
+          currentPlayer={currentPlayerMark}
+          changeState={changeState}
+        />
       </div>
     </div>
   );

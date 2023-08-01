@@ -17,4 +17,8 @@ Alert.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
+export const shouldDisplayAlert = (isValidMove, gameStatus) => {
+  return !isValidMove && gameStatus === "Ongoing";
+};
+
 export default Alert;
