@@ -35,8 +35,8 @@ export default function App() {
     setGameStatus(gameStatus);
   };
 
-  const handleBoardSizeChange = (size) => {
-    setBoardSize(size);
+  const handleBoardSize = (boardSize) => {
+    setBoardSize(boardSize);
   };
 
   const isBoardChosen = () => {
@@ -70,12 +70,12 @@ export default function App() {
             changeTurn={changeTurn}
             currentPlayer={currentPlayerMark}
             changeStatus={changeStatus}
-            size={boardSize}
+            boardSize={boardSize}
           />
         </div>
       ) : (
         <div className="App-body">
-          <Menu handleBoardSizeChange={handleBoardSizeChange} />
+          <Menu handleBoardSize={handleBoardSize} />
         </div>
       )}
     </div>

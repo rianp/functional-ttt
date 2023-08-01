@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 import { getBoardStatus } from "./getBoardStatus";
 import { buildBoard } from "./buildBoard";
 
-function Board({ changeTurn, currentPlayer, changeStatus, size }) {
-  const [boardData, setBoardData] = useState(buildBoard(size));
+function Board({ changeTurn, currentPlayer, changeStatus, boardSize }) {
+  const [boardData, setBoardData] = useState(buildBoard(boardSize));
 
   const handleBoardClick = (cellSpot) => {
     const board = updateBoard(boardData, cellSpot, currentPlayer);
@@ -23,7 +23,7 @@ function Board({ changeTurn, currentPlayer, changeStatus, size }) {
           key={index}
           row={row}
           handleClick={handleBoardClick}
-          boardSize={size}
+          boardSize={boardSize}
         />
       ))}
     </div>

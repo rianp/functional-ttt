@@ -1,8 +1,8 @@
-export function buildBoard(size) {
+export function buildBoard(boardSize) {
   let count = 1;
 
-  return range(0, size).map(() =>
-    range(0, size).map(() => (count++).toString())
+  return range(0, boardSize).map(() =>
+    range(0, boardSize).map(() => (count++).toString())
   );
 }
 

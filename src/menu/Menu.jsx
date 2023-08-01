@@ -1,13 +1,13 @@
 import React from "react";
 
-function Menu({ handleBoardSizeChange }) {
+function Menu({ handleBoardSize }) {
   return (
     <div className="board-size-selection">
       <h1>Select Board Size</h1>
-      <button className="size-button" onClick={() => handleBoardSizeChange(3)}>
+      <button className="size-button" onClick={() => handleBoardSize(3)}>
         3x3
       </button>
-      <button className="size-button" onClick={() => handleBoardSizeChange(5)}>
+      <button className="size-button" onClick={() => handleBoardSize(5)}>
         5x5
       </button>
     </div>
