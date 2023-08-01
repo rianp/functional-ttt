@@ -167,31 +167,3 @@ describe("display game status", () => {
     expect(screen.getByText("Game Status: Winner is X")).toBeVisible();
   });
 });
-
-// describe("isBoardChosen", () => {
-//   test("returns true when boardSize is null", () => {
-//     render(<App />);
-
-//     const isBoardChosenResult = screen
-//       .getByText(/Tic-Tac-Toe/i)
-//       .closest("div")
-//       .isBoardChosen();
-
-//     expect(isBoardChosenResult).toBe(true);
-//   });
-
-//   test("returns false when boardSize is not null", () => {
-//     render(<App />);
-
-//     act(() => {
-//       screen.getByText("3x3").click();
-//     });
-
-//     const isBoardChosenResult = screen
-//       .getByText(/Tic-Tac-Toe/i)
-//       .closest("div")
-//       .isBoardChosen();
-
-//     expect(isBoardChosenResult).toBe(false);
-//   });
-// });
