@@ -4,9 +4,9 @@ export function calculateNextPlayerId(
   currentPlayerId,
   cellSpot,
   setIsValidMove,
-  gameState
+  gameStatus
 ) {
-  if (validateMove(cellSpot, setIsValidMove) & (gameState === "Ongoing")) {
+  if (validateMove(cellSpot, setIsValidMove) & (gameStatus === "Ongoing")) {
     const updatedPlayerId = Math.abs(currentPlayerId - 1);
     return updatedPlayerId;
   }

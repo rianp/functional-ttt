@@ -19,18 +19,18 @@ const GAME_STATUS = {
 export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
   const [isValidMove, setIsValidMove] = useState(true);
-  const [gameState, setGameState] = useState(GAME_STATUS.Ongoing);
+  const [gameStatus, setGameStatus] = useState(GAME_STATUS.Ongoing);
 
   const changeTurn = (cellSpot) => {
     setCurrentPlayerId((prevPlayerId) =>
-      calculateNextPlayerId(prevPlayerId, cellSpot, setIsValidMove, gameState)
+      calculateNextPlayerId(prevPlayerId, cellSpot, setIsValidMove, gameStatus)
     );
   };
 
   const currentPlayerMark = calculateCurrentPlayerMark(currentPlayerId);
 
-  const changeState = (gameState) => {
-    setGameState(gameState);
+  const changeState = (gameStatus) => {
+    setGameStatus(gameStatus);
   };
 
   return (
@@ -47,11 +47,11 @@ export default function App() {
             Current Player: {currentPlayerMark}
           </div>
           <div className="game-state-data">
-            Game Status: {displayGameStatus(gameState)}
+            Game Status: {displayGameStatus(gameStatus)}
           </div>
         </div>
         <div>
-          {shouldDisplayAlert(isValidMove, gameState) && (
+          {shouldDisplayAlert(isValidMove, gameStatus) && (
             <Alert onClose={() => setIsValidMove(true)} />
           )}
         </div>
