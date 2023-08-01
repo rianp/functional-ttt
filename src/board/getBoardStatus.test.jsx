@@ -1,6 +1,6 @@
-import { getBoardState } from "./getBoardState";
+import { getBoardStatus } from "./getBoardStatus";
 
-describe("getBoardState", () => {
+describe("getBoardStatus", () => {
   it('should return "X" when a row is filled with "X"', () => {
     const board = [
       ["X", "X", "X"],
@@ -8,7 +8,7 @@ describe("getBoardState", () => {
       ["", "", "O"],
     ];
 
-    expect(getBoardState(board)).toBe("X");
+    expect(getBoardStatus(board)).toBe("X");
   });
 
   it('should return "O" when a column is filled with "O"', () => {
@@ -18,7 +18,7 @@ describe("getBoardState", () => {
       ["", "O", "X"],
     ];
 
-    expect(getBoardState(board)).toBe("O");
+    expect(getBoardStatus(board)).toBe("O");
   });
 
   it('should return "X" when the diagonal from top-left to bottom-right is filled with "X"', () => {
@@ -28,7 +28,7 @@ describe("getBoardState", () => {
       ["", "", "X"],
     ];
 
-    expect(getBoardState(board)).toBe("X");
+    expect(getBoardStatus(board)).toBe("X");
   });
 
   it('should return "O" when the diagonal from top-right to bottom-left is filled with "O"', () => {
@@ -38,7 +38,7 @@ describe("getBoardState", () => {
       ["O", "", "X"],
     ];
 
-    expect(getBoardState(board)).toBe("O");
+    expect(getBoardStatus(board)).toBe("O");
   });
 
   it('should return "Draw" when the board is filled with "X" and "O"', () => {
@@ -48,7 +48,7 @@ describe("getBoardState", () => {
       ["X", "X", "O"],
     ];
 
-    expect(getBoardState(board)).toBe("Draw");
+    expect(getBoardStatus(board)).toBe("Draw");
   });
 
   it('should return "Ongoing" when the game is still in progress', () => {
@@ -58,6 +58,6 @@ describe("getBoardState", () => {
       ["", "", "O"],
     ];
 
-    expect(getBoardState(board)).toBe("Ongoing");
+    expect(getBoardStatus(board)).toBe("Ongoing");
   });
 });

@@ -29,7 +29,7 @@ export default function App() {
 
   const currentPlayerMark = calculateCurrentPlayerMark(currentPlayerId);
 
-  const changeState = (gameStatus) => {
+  const changeStatus = (gameStatus) => {
     setGameStatus(gameStatus);
   };
 
@@ -42,11 +42,11 @@ export default function App() {
         </InstructionsButton>
       </header>
       <div className="App-body">
-        <div className="game-state">
-          <div className="game-state-data">
+        <div className="game-status">
+          <div className="game-status-data">
             Current Player: {currentPlayerMark}
           </div>
-          <div className="game-state-data">
+          <div className="game-status-data">
             Game Status: {displayGameStatus(gameStatus)}
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function App() {
         <Board
           changeTurn={changeTurn}
           currentPlayer={currentPlayerMark}
-          changeState={changeState}
+          changeStatus={changeStatus}
         />
       </div>
     </div>

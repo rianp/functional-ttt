@@ -1,4 +1,4 @@
-export function getBoardState(board) {
+export function getBoardStatus(board) {
   for (const row of board) {
     if (row.every((cell) => cell === row[0])) {
       return row[0] === "X" ? "X" : "0";

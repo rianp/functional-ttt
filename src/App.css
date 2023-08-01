@@ -52,7 +52,7 @@
   }
 }
 
-.game-state {
+.game-status {
   max-width: 70vh;
   --num-columns: 2;
   display: grid;
