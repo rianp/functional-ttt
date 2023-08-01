@@ -6,14 +6,20 @@ import InstructionsButton from "./instructions/InstructionsButton";
 import {
   calculateNextPlayerId,
   calculateCurrentPlayerMark,
-} from "./game/changeTurn";
+} from "./game/helpers";
 import Alert, { shouldDisplayAlert } from "./common/components/Alert";
 import { displayGameStatus } from "./game/displayGameStatus";
+
+const GAME_STATUS = {
+  Ongoing: "Ongoing",
+  Won: "Won",
+  Draw: "Draw",
+};
 
 export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
   const [isValidMove, setIsValidMove] = useState(true);
-  const [gameState, setGameState] = useState("Ongoing");
+  const [gameState, setGameState] = useState(GAME_STATUS.Ongoing);
 
   const changeTurn = (cellSpot) => {
     setCurrentPlayerId((prevPlayerId) =>
@@ -23,8 +29,8 @@ export default function App() {
 
   const currentPlayerMark = calculateCurrentPlayerMark(currentPlayerId);
 
-  const changeState = (state) => {
-    setGameState(state);
+  const changeState = (gameState) => {
+    setGameState(gameState);
   };
 
   return (

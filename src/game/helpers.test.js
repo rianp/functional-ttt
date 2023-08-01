@@ -1,7 +1,4 @@
-import {
-  calculateNextPlayerId,
-  calculateCurrentPlayerMark,
-} from "./changeTurn";
+import { calculateNextPlayerId, calculateCurrentPlayerMark } from "./helpers";
 
 describe("calculateNextPlayerId", () => {
   it("should return 1 when currentPlayerId is 0", () => {
