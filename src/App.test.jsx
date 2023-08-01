@@ -7,6 +7,51 @@ test("displays the Tic-Tac-Toe header", () => {
   expect(screen.getByText(/Tic-Tac-Toe/i)).toBeVisible();
 });
 
+describe("menu", () => {
+  test("displays at the start of the game", () => {
+    render(<App />);
+
+    expect(screen.getByText("Select Board Size")).toBeVisible();
+  });
+
+  test("isn't displayed after board size is chosen", () => {
+    render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
+
+    expect(screen.queryByText("Select Board Size")).not.toBeInTheDocument();
+  });
+});
+
+describe("correctly sized board", () => {
+  test("is displayed when a 3x3 board is chosen", () => {
+    render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
+
+    expect(screen.getByText("1")).toBeVisible();
+    expect(screen.getByText("9")).toBeVisible();
+    expect(screen.queryByText("10")).not.toBeInTheDocument();
+  });
+
+  test("is displayed when a 5x5 board is chosen", () => {
+    render(<App />);
+    const sizeButton = screen.getByText("5x5");
+    fireEvent.click(sizeButton);
+
+    expect(screen.getByText("1")).toBeVisible();
+    expect(screen.getByText("25")).toBeVisible();
+    expect(screen.queryByText("26")).not.toBeInTheDocument();
+  });
+
+  test("isn't displayed when a board hasn't been chosen", () => {
+    render(<App />);
+
+    expect(screen.queryByText("1")).not.toBeInTheDocument();
+    expect(screen.queryByText("9")).not.toBeInTheDocument();
+  });
+});
+
 test("updates the currentPlayer", () => {
   render(<App />);
   const sizeButton = screen.getByText("3x3");
@@ -135,31 +180,3 @@ describe("display game status", () => {
     expect(screen.getByText("Game Status: Winner is X")).toBeVisible();
   });
 });
-
-// describe("isBoardChosen", () => {
-//   test("returns true when boardSize is null", () => {
-//     render(<App />);
-
-//     const isBoardChosenResult = screen
-//       .getByText(/Tic-Tac-Toe/i)
-//       .closest("div")
-//       .isBoardChosen();
-
-//     expect(isBoardChosenResult).toBe(true);
-//   });
-
-//   test("returns false when boardSize is not null", () => {
-//     render(<App />);
-
-//     act(() => {
-//       screen.getByText("3x3").click();
-//     });
-
-//     const isBoardChosenResult = screen
-//       .getByText(/Tic-Tac-Toe/i)
-//       .closest("div")
-//       .isBoardChosen();
-
-//     expect(isBoardChosenResult).toBe(false);
-//   });
-// });
