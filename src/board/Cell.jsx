@@ -1,9 +1,24 @@
+import React, { useState } from "react";
 import "./Cell.css";
 import PropTypes from "prop-types";
+import { isValidMove } from "../validation/validateMove";
 
 function Cell({ cellSpot, handleClick }) {
+  console.log(cellSpot);
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleCellClick = () => {
+    if (isValidMove(cellSpot)) {
+      setIsFlipped(!isFlipped);
+    }
+    handleClick(cellSpot);
+  };
+
   return (
-    <div className="cell" onClick={() => handleClick(cellSpot)}>
+    <div
+      className={`cell ${isFlipped ? "flipped" : ""}`}
+      onClick={handleCellClick}
+    >
       {cellSpot}
     </div>
   );
