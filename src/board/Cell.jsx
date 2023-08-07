@@ -3,13 +3,15 @@ import "./Cell.css";
 import PropTypes from "prop-types";
 import { isValidMove } from "../validation/validateMove";
 
-function Cell({ cellSpot, handleClick }) {
+function Cell({ cellSpot, handleClick, gameStatus }) {
   console.log(cellSpot);
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleCellClick = () => {
-    if (isValidMove(cellSpot)) {
+    const audio = new Audio(process.env.PUBLIC_URL + "/cell.wav");
+    if (isValidMove(cellSpot) & (gameStatus === "Ongoing")) {
       setIsFlipped(!isFlipped);
+      audio.play();
     }
     handleClick(cellSpot);
   };
