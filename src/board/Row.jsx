@@ -1,18 +1,21 @@
+import React from "react";
+import PropTypes from "prop-types";
 import Cell from "./Cell";
 import "./Row.css";
-import PropTypes from "prop-types";
 
-function Row({ row, handleClick }) {
+const Row = ({ row, handleClick, boardSize }) => {
+  const gridStyle = {
+    "--num-columns": boardSize,
+  };
+
   return (
-    <div className="row">
-      {row.map((cellSpot, index) => {
-        return (
-          <Cell key={index} cellSpot={cellSpot} handleClick={handleClick} />
-        );
-      })}
+    <div style={gridStyle} className="row">
+      {row.map((cellSpot, index) => (
+        <Cell key={index} cellSpot={cellSpot} handleClick={handleClick} />
+      ))}
     </div>
   );
-}
+};
 
 Row.propTypes = {
   row: PropTypes.arrayOf(PropTypes.string).isRequired,

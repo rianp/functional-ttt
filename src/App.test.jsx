@@ -7,8 +7,58 @@ test("displays the Tic-Tac-Toe header", () => {
   expect(screen.getByText(/Tic-Tac-Toe/i)).toBeVisible();
 });
 
+describe("menu", () => {
+  test("should display at the start of the game", () => {
+    render(<App />);
+
+    expect(screen.getByText("Select Board Size")).toBeVisible();
+  });
+
+  test("should not be displayed after board size is chosen", () => {
+    render(<App />);
+    const sizeButton = screen.getByText("3x3");
+
+    fireEvent.click(sizeButton);
+
+    expect(screen.queryByText("Select Board Size")).not.toBeInTheDocument();
+  });
+});
+
+describe("correctly sized board", () => {
+  test("should be displayed when a 3x3 board is chosen", () => {
+    render(<App />);
+    const sizeButton = screen.getByText("3x3");
+
+    fireEvent.click(sizeButton);
+
+    expect(screen.getByText("1")).toBeVisible();
+    expect(screen.getByText("9")).toBeVisible();
+    expect(screen.queryByText("10")).not.toBeInTheDocument();
+  });
+
+  test("should be displayed when a 5x5 board is chosen", () => {
+    render(<App />);
+    const sizeButton = screen.getByText("5x5");
+
+    fireEvent.click(sizeButton);
+
+    expect(screen.getByText("1")).toBeVisible();
+    expect(screen.getByText("25")).toBeVisible();
+    expect(screen.queryByText("26")).not.toBeInTheDocument();
+  });
+
+  test("should not be displayed when a board hasn't been chosen", () => {
+    render(<App />);
+
+    expect(screen.queryByText("1")).not.toBeInTheDocument();
+    expect(screen.queryByText("9")).not.toBeInTheDocument();
+  });
+});
+
 test("updates the currentPlayer", () => {
   render(<App />);
+  const sizeButton = screen.getByText("3x3");
+  fireEvent.click(sizeButton);
   const cellOne = screen.getByText("1");
   const cellTwo = screen.getByText("2");
 
@@ -22,16 +72,19 @@ test("updates the currentPlayer", () => {
 });
 
 describe("alert message", () => {
-  test("doesn't display alert on initial load.", () => {
+  beforeEach(() => {
     render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
+  });
 
+  test("doesn't display alert on initial load.", () => {
     expect(
       screen.queryByText("Move already made. Please choose an empty cell.")
     ).not.toBeInTheDocument();
   });
 
   test("displays the alert message when an invalid move is made", () => {
-    render(<App />);
     const cellOne = screen.getByText("1");
 
     fireEvent.click(cellOne);
@@ -43,7 +96,6 @@ describe("alert message", () => {
   });
 
   test("closes alert when the close button is clicked.", () => {
-    render(<App />);
     const cellOne = screen.getByText("1");
 
     fireEvent.click(cellOne);
@@ -57,15 +109,17 @@ describe("alert message", () => {
 });
 
 describe("display game status", () => {
-  test("displays game is ongoing when game isn't finished.", () => {
+  beforeEach(() => {
     render(<App />);
+    const sizeButton = screen.getByText("3x3");
+    fireEvent.click(sizeButton);
+  });
 
+  test("displays game is ongoing when game isn't finished.", () => {
     expect(screen.queryByText("Game Status: Ongoing")).toBeVisible();
   });
 
   test("displays game is a draw when there is no winner.", () => {
-    render(<App />);
-
     fireEvent.click(screen.getByText("1"));
     fireEvent.click(screen.getByText("2"));
     fireEvent.click(screen.getByText("3"));
@@ -80,8 +134,6 @@ describe("display game status", () => {
   });
 
   test("displays game winner is X when player X has won horizontally.", () => {
-    render(<App />);
-
     fireEvent.click(screen.getByText("1"));
     fireEvent.click(screen.getByText("4"));
     fireEvent.click(screen.getByText("2"));
@@ -92,8 +144,6 @@ describe("display game status", () => {
   });
 
   test("displays game winner is X when player X has won vertically.", () => {
-    render(<App />);
-
     fireEvent.click(screen.getByText("1"));
     fireEvent.click(screen.getByText("5"));
     fireEvent.click(screen.getByText("4"));
@@ -104,8 +154,6 @@ describe("display game status", () => {
   });
 
   test("displays game winner is X when player X has won diagonally.", () => {
-    render(<App />);
-
     fireEvent.click(screen.getByText("1"));
     fireEvent.click(screen.getByText("2"));
     fireEvent.click(screen.getByText("3"));

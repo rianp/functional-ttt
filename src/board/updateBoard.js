@@ -1,10 +1,10 @@
-import { getBoardState } from "./getBoardState";
+import { getBoardStatus } from "./getBoardStatus";
 
 export function updateBoard(board, cellSpot, currentPlayer) {
   if (
     cellSpot === "X" ||
     cellSpot === "O" ||
-    getBoardState(board) !== "Ongoing"
+    getBoardStatus(board) !== "Ongoing"
   ) {
     return board;
   }

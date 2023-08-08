@@ -9,6 +9,7 @@ import {
 } from "./game/helpers";
 import Alert, { shouldDisplayAlert } from "./common/components/Alert";
 import { displayGameStatus } from "./game/displayGameStatus";
+import Menu from "./menu/Menu";
 
 const GAME_STATUS = {
   Ongoing: "Ongoing",
@@ -20,6 +21,7 @@ export default function App() {
   const [currentPlayerId, setCurrentPlayerId] = useState(0);
   const [isValidMove, setIsValidMove] = useState(true);
   const [gameStatus, setGameStatus] = useState(GAME_STATUS.Ongoing);
+  const [boardSize, setBoardSize] = useState(null);
 
   const changeTurn = (cellSpot) => {
     setCurrentPlayerId((prevPlayerId) =>
@@ -29,8 +31,16 @@ export default function App() {
 
   const currentPlayerMark = calculateCurrentPlayerMark(currentPlayerId);
 
-  const changeState = (gameStatus) => {
+  const changeStatus = (gameStatus) => {
     setGameStatus(gameStatus);
+  };
+
+  const handleBoardSize = (boardSize) => {
+    setBoardSize(boardSize);
+  };
+
+  const isBoardChosen = () => {
+    return boardSize !== null;
   };
 
   return (
@@ -41,26 +51,33 @@ export default function App() {
           <Instructions />
         </InstructionsButton>
       </header>
-      <div className="App-body">
-        <div className="game-state">
-          <div className="game-state-data">
-            Current Player: {currentPlayerMark}
+      {isBoardChosen() ? (
+        <div className="App-body">
+          <div className="game-status">
+            <div className="game-status-data">
+              Current Player: {currentPlayerMark}
+            </div>
+            <div className="game-status-data">
+              Game Status: {displayGameStatus(gameStatus)}
+            </div>
           </div>
-          <div className="game-state-data">
-            Game Status: {displayGameStatus(gameStatus)}
+          <div>
+            {shouldDisplayAlert(isValidMove, gameStatus) && (
+              <Alert onClose={() => setIsValidMove(true)} />
+            )}
           </div>
+          <Board
+            changeTurn={changeTurn}
+            currentPlayer={currentPlayerMark}
+            changeStatus={changeStatus}
+            boardSize={boardSize}
+          />
         </div>
-        <div>
-          {shouldDisplayAlert(isValidMove, gameStatus) && (
-            <Alert onClose={() => setIsValidMove(true)} />
-          )}
+      ) : (
+        <div className="App-body">
+          <Menu handleBoardSize={handleBoardSize} />
         </div>
-        <Board
-          changeTurn={changeTurn}
-          currentPlayer={currentPlayerMark}
-          changeState={changeState}
-        />
-      </div>
+      )}
     </div>
   );
 }

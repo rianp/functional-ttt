@@ -1,11 +1,11 @@
-export function getBoardState(board) {
+export function getBoardStatus(board) {
   for (const row of board) {
     if (row.every((cell) => cell === row[0])) {
-      return row[0] === "X" ? "X" : "0";
+      return row[0] === "X" ? "X" : "O";
     }
   }
 
-  for (let col = 0; col < 3; col++) {
+  for (let col = 0; col < board.length; col++) {
     if (board.every((row) => row[col] === board[0][col])) {
       return board[0][col] === "X" ? "X" : "O";
     }
@@ -15,8 +15,12 @@ export function getBoardState(board) {
     return board[0][0] === "X" ? "X" : "O";
   }
 
-  if (board.every((row, i) => row[2 - i] === board[0][2])) {
-    return board[0][2] === "X" ? "X" : "O";
+  if (
+    board.every(
+      (row, i) => row[row.length - i - 1] === board[0][row.length - 1]
+    )
+  ) {
+    return board[0][board.length - 1] === "X" ? "X" : "O";
   }
 
   if (board.every((row) => row.every((cell) => cell === "X" || cell === "O"))) {

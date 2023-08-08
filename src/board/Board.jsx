@@ -2,24 +2,29 @@ import React, { useState } from "react";
 import Row from "./Row";
 import "./Board.css";
 import { updateBoard } from "./updateBoard";
-import { defaultBoardData } from "../board/boardData";
 import PropTypes from "prop-types";
-import { getBoardState } from "./getBoardState";
+import { getBoardStatus } from "./getBoardStatus";
+import { buildBoard } from "./buildBoard";
 
-function Board({ changeTurn, currentPlayer, changeState }) {
-  const [boardData, setBoardData] = useState(defaultBoardData);
+function Board({ changeTurn, currentPlayer, changeStatus, boardSize }) {
+  const [boardData, setBoardData] = useState(buildBoard(boardSize));
 
   const handleBoardClick = (cellSpot) => {
     const board = updateBoard(boardData, cellSpot, currentPlayer);
     setBoardData(board);
-    changeState(getBoardState(board));
+    changeStatus(getBoardStatus(board));
     changeTurn(cellSpot);
   };
 
   return (
     <div className="board">
       {boardData.map((row, index) => (
-        <Row key={index} row={row} handleClick={handleBoardClick} />
+        <Row
+          key={index}
+          row={row}
+          handleClick={handleBoardClick}
+          boardSize={boardSize}
+        />
       ))}
     </div>
   );
@@ -28,7 +33,7 @@ function Board({ changeTurn, currentPlayer, changeState }) {
 Board.propTypes = {
   changeTurn: PropTypes.func.isRequired,
   currentPlayer: PropTypes.string.isRequired,
-  changeState: PropTypes.func.isRequired,
+  changeStatus: PropTypes.func.isRequired,
 };
 
 export default Board;
