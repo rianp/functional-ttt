@@ -53,12 +53,6 @@ export default function App() {
       </header>
       {isBoardChosen() ? (
         <div className="App-body">
-          {/* <audio id="audio" loop autoPlay>
-            <source
-              src={process.env.PUBLIC_URL + "/bg-loop.wav"}
-              type="audio/mpeg"
-            ></source>
-          </audio> */}
           <InstructionsButton>
             <Instructions />
           </InstructionsButton>
