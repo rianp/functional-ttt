@@ -1,5 +1,8 @@
 export const validateMove = (cellSpot, setIsValidMove) => {
-  const isValidMove = cellSpot !== "X" && cellSpot !== "O";
-  setIsValidMove(isValidMove);
-  return isValidMove;
+  setIsValidMove(isValidMove(cellSpot));
+  return isValidMove(cellSpot);
+};
+
+export const isValidMove = (cellSpot) => {
+  return cellSpot !== "X" && cellSpot !== "O";
 };

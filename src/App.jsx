@@ -46,19 +46,26 @@ export default function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Tic-Tac-Toe</h1>
-        <InstructionsButton>
-          <Instructions />
-        </InstructionsButton>
+        <div className="banner">
+          <img className="image" src={require("./title-banner.png")}></img>
+          <h1 className="banner-text">Tic-Tac-Toe</h1>
+        </div>
       </header>
       {isBoardChosen() ? (
         <div className="App-body">
+          <InstructionsButton>
+            <Instructions />
+          </InstructionsButton>
           <div className="game-status">
             <div className="game-status-data">
-              Current Player: {currentPlayerMark}
+              Current Player:{" "}
+              <span className="game-status-text">{currentPlayerMark}</span>
             </div>
             <div className="game-status-data">
-              Game Status: {displayGameStatus(gameStatus)}
+              Game Status:{" "}
+              <span className="game-status-text">
+                {displayGameStatus(gameStatus)}
+              </span>
             </div>
           </div>
           <div>
@@ -71,6 +78,7 @@ export default function App() {
             currentPlayer={currentPlayerMark}
             changeStatus={changeStatus}
             boardSize={boardSize}
+            gameStatus={gameStatus}
           />
         </div>
       ) : (

@@ -116,7 +116,7 @@ describe("display game status", () => {
   });
 
   test("displays game is ongoing when game isn't finished.", () => {
-    expect(screen.queryByText("Game Status: Ongoing")).toBeVisible();
+    expect(screen.queryByText("Ongoing")).toBeVisible();
   });
 
   test("displays game is a draw when there is no winner.", () => {
@@ -130,7 +130,7 @@ describe("display game status", () => {
     fireEvent.click(screen.getByText("7"));
     fireEvent.click(screen.getByText("9"));
 
-    expect(screen.getByText("Game Status: Draw")).toBeVisible();
+    expect(screen.getByText("Draw")).toBeVisible();
   });
 
   test("displays game winner is X when player X has won horizontally.", () => {
@@ -140,7 +140,7 @@ describe("display game status", () => {
     fireEvent.click(screen.getByText("5"));
     fireEvent.click(screen.getByText("3"));
 
-    expect(screen.getByText("Game Status: Winner is X")).toBeVisible();
+    expect(screen.getByText("Winner is X")).toBeVisible();
   });
 
   test("displays game winner is X when player X has won vertically.", () => {
@@ -150,7 +150,7 @@ describe("display game status", () => {
     fireEvent.click(screen.getByText("6"));
     fireEvent.click(screen.getByText("7"));
 
-    expect(screen.getByText("Game Status: Winner is X")).toBeVisible();
+    expect(screen.getByText("Winner is X")).toBeVisible();
   });
 
   test("displays game winner is X when player X has won diagonally.", () => {
@@ -164,6 +164,6 @@ describe("display game status", () => {
     fireEvent.click(screen.getByText("8"));
     fireEvent.click(screen.getByText("9"));
 
-    expect(screen.getByText("Game Status: Winner is X")).toBeVisible();
+    expect(screen.getByText("Winner is X")).toBeVisible();
   });
 });
