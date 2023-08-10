@@ -52,8 +52,6 @@ export default function App() {
     return boardSize !== null;
   };
 
-  console.log("welcome image", welcomeImage);
-
   return (
     <div className="App">
       <header className="App-header">
