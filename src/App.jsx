@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Board from "./board/Board";
 import { Instructions } from "./instructions/Instructions";
@@ -22,6 +22,15 @@ export default function App() {
   const [isValidMove, setIsValidMove] = useState(true);
   const [gameStatus, setGameStatus] = useState(GAME_STATUS.Ongoing);
   const [boardSize, setBoardSize] = useState(null);
+  const [welcomeImage, setWelcomeImage] = useState();
+
+  useEffect(() => {
+    fetch("https://dog.ceo/api/breeds/image/random")
+      .then((response) => response.json())
+      .then((data) => {
+        setWelcomeImage(data.message);
+      });
+  }, []);
 
   const changeTurn = (cellSpot) => {
     setCurrentPlayerId((prevPlayerId) =>
@@ -42,6 +51,8 @@ export default function App() {
   const isBoardChosen = () => {
     return boardSize !== null;
   };
+
+  console.log("welcome image", welcomeImage);
 
   return (
     <div className="App">
@@ -84,6 +95,7 @@ export default function App() {
       ) : (
         <div className="App-body">
           <Menu handleBoardSize={handleBoardSize} />
+          <img src={welcomeImage} alt="Welcome" className="welcome-image" />
         </div>
       )}
     </div>
