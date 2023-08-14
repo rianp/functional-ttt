@@ -1,5 +1,7 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
+import { setupServer } from "msw/node";
+import { rest } from "msw";
 
 test("displays the Tic-Tac-Toe header", () => {
   render(<App />);
@@ -167,3 +169,21 @@ describe("display game status", () => {
     expect(screen.getByText("Winner is X")).toBeVisible();
   });
 });
+
+const server = setupServer(
+  rest.get("https://dog.ceo/api/breeds/image/random", (req, res, ctx) => {
+    return res(ctx.json({ message: "mock-image-url" }));
+  })
+);
+
+test("fetches data from server and displays it", async () => {
+  server.listen();
+
+  render(<App />);
+
+  await waitFor(() => expect(screen.getByAltText("Welcome").src).toBeTruthy());
+
+  server.close();
+});
+
+jest.mock("./common/components/playAudio");
